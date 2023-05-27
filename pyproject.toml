@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "factoidfinance"
+version = "0.1.0"
+description = "Financial Modeling and Prediction Service"
+authors = ["Abhinav Chavali <abhinavchavali12@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
