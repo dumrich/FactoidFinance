@@ -7,10 +7,9 @@ Source code for TSA Project Factoid Finance
 - Portfolio Dashboard (List View with Graphs etc)
 - Detail Asset View
 - Fundamental Analysis
-- Technical Analysis
-- Quant Finance
 - News Sentiment Analysis
 - Scanner
+- Watchlist, charts, etc
 
 ## Technical Stack
 - Django
@@ -21,4 +20,4 @@ Source code for TSA Project Factoid Finance
 - Github Actions CI/CD
 - Logging
 - Gunicorn, Nginx
-- EC2, S3, RDS
+- Vultr full deployment 
