@@ -6,7 +6,7 @@ class CustomUserManager(BaseUserManager):
     Custom User Model with Username or email auth
     """
 
-    def create_user(self, email, username, password, **extra_fields):
+    def create_user(self, email=None, username=None, password=None, **extra_fields):
         if not email or not username:
             raise ValueError(_("Email and Username field required"))
 
@@ -28,4 +28,4 @@ class CustomUserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
 
-        return self.create_user(email, password, **extra_fields)
+        return self.create_user(email, username, password, **extra_fields)
