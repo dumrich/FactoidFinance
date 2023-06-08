@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     # Apps
     'users.apps.UsersConfig',
-    'analysis.apps.AnalysisConfig'
+    'analysis.apps.AnalysisConfig',
 
 ]
 
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'factoid_finance.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +126,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -134,3 +137,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Additional Settings
 AUTH_USER_MODEL = "users.CustomUser"
+
+# TODO: Separate these into separate file
+SECTOR_CHOICES = (
+    ('ENER', 'Energy'),
+    ('MAT', 'Materials'),
+    ('IND', 'Industrials'),
+    ('UTIL', 'Utilities'),
+    ('HEALTH', 'Healthcare'),
+    ('FIN', 'Financials'),
+    ('DISC', 'Consumer Discretionary'),
+    ('STAP', 'Consumer Staples'),
+    ('IT', 'Information Technology'),
+    ('COMM', 'Communication Services'),
+    ('REAL', 'Real Estate'),
+)
