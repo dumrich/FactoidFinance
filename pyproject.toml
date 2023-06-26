@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "factoidfinance"
+version = "0.1.0"
+description = "Financial Modeling and Prediction Service"
+authors = ["Abhinav Chavali <abhinavchavali12@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.1"
+psycopg2-binary = "^2.9.6"
+redis = "^4.5.5"
+django-redis = "^5.2.0"
+requests = "^2.31.0"
+celery = "^5.3.0"
+django-celery-beat = "^2.5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

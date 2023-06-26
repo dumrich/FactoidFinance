@@ -1,0 +1,162 @@
+{% extends './base.html' %}
+
+{% block content %}
+<div class="col-xxl-7 col-xl-6 col-lg-6">
+
+<div class="single-slider">
+<div class="trending-top mb-30">
+<div class="trend-top-img">
+  <a href="{% url 'article_detail' latest_article.slug %}">
+    <img src="{{ latest_article.thumbnail }}" width="889.3" height="414.783" alt="">
+  </a>
+
+
+</div>
+<div class="trend-top-cap">
+  <span>{{latest_article.get_category_display}}
+  </span>
+  <h2>
+    <a style="text-decoration: none;" href="{% url 'article_detail' latest_article.slug %}">{{latest_article.title}}
+    </a>
+  </h2>
+  <p>by
+    <a style="text-decoration: none;" href="#">Factoid Daily 
+    </a>
+  </p>
+<div class="btn-group">
+{% for source in latest_article.source_set.all %}
+
+    <button class="btn source-link-mini"><a style="text-decoration: none; color: inherit;" href="{{ source.source }}">{{ source.sourceOrg }}</a>
+    </button>
+&nbsp;
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<style>
+  .source-link-mini {
+      font-family: "Chivo", sans-serif;
+      text-decoration: none;
+      background: #C70D0D;
+      font-size: 20px;
+      text-align: center;
+      color: #fff;
+      display: inline-block;
+      padding: 7px 7px;
+      line-height: 14px;
+  }
+</style>
+
+
+<div class="col-xxl-5 col-xl-6 col-lg-6">
+<div class="row">
+{% for art in main_articles %}
+<div class="col-xl-12 col-lg-12 col-md-11">
+<div class="whats-right-single mb-20">
+<div class="whats-right-img">
+  <a href="{%url 'article_detail' art.slug%}">
+    <img src="{{ art.thumbnail }}" width="312" height="210" alt="">
+  </a>
+</div>
+<div class="whats-right-cap">
+  <span>{{art.get_category_display}}
+  </span>
+  <h4>
+    <a style="text-decoration: none;" href="{%url 'article_detail' art.slug%}">{{art.title}}
+    </a>
+  </h4>
+  <p>by
+    <a style="text-decoration: none;" href="#"> {% if p.author %} p.author{% else %} Factoid Daily {%endif%}
+    </a>
+  </p>
+
+<div class="btn-group">
+{% for source in art.source_set.all %}
+
+    <button class="btn source-link-mini"><a style="text-decoration: none; color: inherit;" href="{{ source }}">{{ source.sourceOrg }}</a>
+    </button>
+    
+{% endfor %}
+</div>
+</div>
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+
+{% for category, article in profile_arts %}
+<section class="technology-area mb-30">
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-12">
+<div class="section-tittle mb-30 d-flex align-items-center justify-content-between">
+<h2>{{category.name | capfirst}}</h2>
+<a href="{% url 'category_url' category.name %}">See All</a>
+</div>
+</div>
+</div>
+<div class="row">
+  {% for p in article %}
+<div class="col-lg-3 col-md-6 col-sm-6">
+<div class="technology-post mb-30">
+<div class="technology-wrapper">
+<div class="properties-img">
+<a href="{% url 'article_detail' p.slug%}"><img src="{{ p.thumbnail }}" alt=""></a>
+</div>
+<div class="properties-caption">
+<span>{{ p.category }}</span>
+<h3><a style="text-decoration: none;" href="{% url 'article_detail' p.slug %}">{{ p.title }}</a></h3>
+<p>by <a style="text-decoration: none;" href="#">{% if p.author %}Nikita Kiselov{% else %} Factoid Daily {%endif%}</a></p>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</section>
+{% endfor %}
+
+{% endblock %}
+
+{% block prefoot %}
+<div class="subscribe-area section-bg">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-xxl-7 col-xl-8 col-lg-9">
+
+<div class="subcrition-tittle text-center mb-40">
+  <h2>Subscribe to the newsletter
+  </h2>
+  <p>Get a weekly digest of our most important stories direct to your inbox.
+  </p>
+</div>
+
+<form action="#" class="search-box">
+<div class="input-form">
+<input type="text" placeholder="Enter your mail">
+</div>
+<div class="search-form">
+  <a href="#">Send Now
+  </a>
+</div>
+</form>
+<div class="pera text-center pt-10">
+  <p>Emails sent in accordance to
+    <a href="#" style="text-decoration: none;">privacy policy
+    </a>.
+  </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

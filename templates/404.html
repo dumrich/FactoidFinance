@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Page not Found
+{% endblock %}
+
+{% block content %}
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f1f1f1;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: #007bff;
+}
+</style>
+
+  <div class="container">
+    <h1>404</h1>
+    <p>Page not found</p>
+    <a href="/">Go to Homepage</a>
+  </div>
+ {% endblock %}
