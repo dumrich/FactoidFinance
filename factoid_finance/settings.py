@@ -39,10 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
-    # Apps
+    # My Apps
     'users.apps.UsersConfig',
     'analysis.apps.AnalysisConfig',
+    'articles.apps.ArticlesConfig',
+
+    # 3rd Party Apps
+    'django_celery_beat'
 
 ]
 
@@ -91,6 +96,16 @@ DATABASES = {
     }
 }
 
+# Redis Cache Setup
+CACHES = {
+    'default': {
+        'BACKEND': environ.get("CACHE_BACKEND"),
+        'LOCATION': environ.get("CACHE_LOCATION"),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -126,7 +141,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -156,3 +171,11 @@ SECTOR_CHOICES = (
     ('COMM', 'Communication Services'),
     ('REAL', 'Real Estate'),
 )
+
+# CELERY Settings
+CELERY_TIMEZONE = "America/New_York"
+CELERY_BROKER_URL = "redis://redis:6379/0"
+CELERY_RESULT_BACKEND = "redis://redis:6379/0"
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+CACHE_TTL = 60 * 5

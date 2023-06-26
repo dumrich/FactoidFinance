@@ -23,11 +23,28 @@ Source code for TSA Project Factoid Finance
 - Vultr full deployment 
 
 ## TODO List
-6/12 . All User stuff + Stock pages
-6/13 - 6/15 . UI overload for all pages (dummy data) + Assets
-6/16 . Get data and perform calculation
-6/17 . Automated scraping and crawling
-6/18 . UI overload
-6/19 . 6/21 . News Feed analysis
-6/22 . Redis + Celery
+Immediate:
+    - Clean up template
+      - Category News
+      - Dashboard
+      - Detail Views
+    - Stock Screener + Schedule
+    - Stock Analysis + Schedule
+    
+. All User stuff + Stock pages
+. Get data and perform calculation
+. Automated scraping and crawling
+. News Feed analysis
+. Redis + Celery
+. UI overload
 6/23 - 6/26 . Production and Buffer Other stuff
+
+## Usage
+Run celery:
+```bash
+docker-compose exec web /home/myuser/.local/bin/celery -A factoid_finance worker -B -l info
+```
+
+## Colorscheme
+#81FFD9 - Inside
+#051726 - Background

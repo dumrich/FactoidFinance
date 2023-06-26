@@ -10,12 +10,16 @@ run:
 .PHONY: run-logs
 run-logs:
 	poetry run pip freeze > requirements.txt
-	docker-compose up --build
+	docker-compose up --build 
 
 .PHONY: migrate
 migrate:
 	docker-compose exec web python manage.py makemigrations
 	docker-compose exec web python manage.py migrate
+
+.PHONY: shell
+shell:
+	docker-compose exec web python manage.py shell
 
 .PHONY: down
 down:

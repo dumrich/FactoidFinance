@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load tz %}
+{% load humanize %}
+
+{% block title %}
+{{stock.ticker}} Stock
+{% endblock %}
+
+{% block content %}
+<h1>
+  Stock details {{stock.firm_name}} ({{stock.ticker}})
+</h1>
+
+<div class="exchange">{{details.exchange}}: {{stock.ticker}} - Real Time - USD</div>
+
+<div class="stock-info">
+  <div class="price">
+    ${{details.price}}
+  </div>
+    {% if details.change > 0 %}
+  <div class="change change-pos">
+    +{{details.change}}
+  </div>
+  {% else %}
+  <div class="change change-neg">
+    {{details.change}}
+  </div>
+  {% endif %}
+</div>
+{% localtime on %}
+  <div class="update-time">Last updated: {{ details.updated_at|localtime }}</div>
+{% endlocaltime %}
+
+<ul class="nav nav-tabs" role="tablist">
+
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" data-bs-toggle="tab" href="#home" aria-selected="true" role="tab">Home</a>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" data-bs-toggle="tab" href="#financials" aria-selected="false" tabindex="-1" role="tab">Financials</a>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" data-bs-toggle="tab" href="#forecast" aria-selected="false" tabindex="-1" role="tab">Forecast</a>
+  </li>
+
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" data-bs-toggle="tab" href="#profile" aria-selected="false" tabindex="-1" role="tab">Profile</a>
+  </li>
+  
+  <li class="nav-item" role="presentation">
+    <a class="nav-link disabled" href="#" aria-selected="false" tabindex="-1" role="tab">Statistics</a>
+  </li>
+
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="pb-9 tab-pane fade show active" id="home" role="tabpanel">
+
+<div class="data-chart">
+
+<table class="stock-data table table-hover">
+  {% comment %}
+  <thead>
+    <tr>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  {% endcomment %}
+  <tbody>
+    <tr>
+      <td class="stock-data-num">Market Cap: ${{details.marketCap|intcomma}}</td>
+      <td class="stock-data-num">Volume: {{details.volume|intcomma}}</td>
+    </tr>
+    <tr>
+      <td class="stock-data-num">Revenue: </td>
+      <td class="stock-data-num">Open: {{details.open|intcomma}}</td>
+    </tr>
+    <tr>
+      <td class="stock-data-num">Net Income: </td>
+      <td class="stock-data-num">Previous Close: {{details.previousclose|intcomma}}</td>
+    </tr>
+    <tr>
+      <td class="stock-data-num">Shares Outstanding: {{details.sharesOutstanding|intcomma}}</td>
+      <td class="stock-data-num">EPS: {{details.eps}}</td>
+    </tr>
+    <tr>
+      <td class="stock-data-num">PE Ratio: ${{details.pe}}</td>
+      <td class="stock-data-num">Analysts Rating: Sell </td>
+    </tr>
+  </tbody>
+</table>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+  "symbols": [
+    [
+        "{{stock.firm_name}}",
+        "{{stock.ticker}}|1D"
+    ]
+  ],
+  "chartOnly": false,
+  "width": 1000,
+  "height": 500,
+  "locale": "en",
+  "colorTheme": "light",
+  "autosize": false,
+  "showVolume": false,
+  "showMA": false,
+  "hideDateRanges": false,
+  "hideMarketStatus": false,
+  "hideSymbolLogo": false,
+  "scalePosition": "right",
+  "scaleMode": "Normal",
+  "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+  "fontSize": "10",
+  "noTimeScale": false,
+  "valuesTracking": "1",
+  "changeMode": "price-and-percent",
+  "chartType": "area",
+  "maLineColor": "#2962FF",
+  "maLineWidth": 1,
+  "maLength": 9,
+  "lineWidth": 2,
+  "lineType": 0,
+  "dateRanges": [
+    "1d|1",
+    "1m|30",
+    "3m|60",
+    "12m|1D",
+    "60m|1W",
+    "all|1M"
+  ]
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+</div>
+  </div>
+  <div class="tab-pane fade" id="financials" role="tabpanel">
+    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="forecast" role="tabpanel">
+    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel">
+    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+  </div>
+</div>
+{% endblock %}

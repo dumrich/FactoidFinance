@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
+
 class CustomUserManager(BaseUserManager):
     """
     Custom User Model with Username or email auth
@@ -15,7 +16,7 @@ class CustomUserManager(BaseUserManager):
 
         user.set_password(password)
         user.save(using=self._db)
-        
+
         return user
 
     def create_superuser(self, email, username, password, **extra_fields):
