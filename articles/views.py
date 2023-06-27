@@ -30,7 +30,7 @@ def dashboard(request):
         )
 
     latest_article = Article.objects.latest('id')
-    main_articles = Article.objects.filter(id__in=[2999, 2995, 2996, 2978])[1:4]
+    main_articles = Article.objects.filter(id__in=[85, 74, 3, 30])[1:4]
 
     return render(request, 'articles/dashboard.html',
                   {'latest_article': latest_article,
