@@ -3,7 +3,7 @@ version: "3.9"
 services:
     web:
         build: .
-        command: sh -c "python /code/manage.py runserver 0.0.0.0:8000 & /home/myuser/.local/bin/celery -A factoid_finance beat -l info"
+        command: sh -c "python /code/manage.py runserver 0.0.0.0:8000"
         volumes:
             - .:/code
         ports:

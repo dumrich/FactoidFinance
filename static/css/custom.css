@@ -80,3 +80,8 @@
 .stock-data-num {
     font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif
 }
+
+.prf {
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,5 +1,6 @@
 from celery import shared_task
 import requests
+from datetime import datetime
 from .analyze import Screener  # , Analyze
 from .models import Stock, StockAnalysis
 from articles.models import Article
@@ -8,6 +9,41 @@ from math import ceil
 from .analyze import Screener, News, BASE_URL, FMP_KEY
 import time
 
+def custom_stock():
+    # Stock News for top 500 stocks
+    top_stocks = Stock.objects.order_by('-market_cap')[:100]
+    for stock in top_stocks:
+        print(stock)
+        response = News.screen_ticker(stock.ticker)
+        for article in response:
+            date, title, image, site, text, url = \
+                article["publishedDate"], article["title"],\
+                article["image"], article["site"], article["text"],\
+                article["url"]
+
+            c = None
+
+            try:
+                if stock.ticker == "AAPL":
+                    print(article)
+
+                c = Article.objects.get(title=title)
+
+                c.stock = stock
+
+            except Article.DoesNotExist:
+                c = Article()
+
+                c.title = title
+                c.date = datetime.now()
+                c.image_link = image
+                c.content = text
+                c.original_link = url
+                c.site = site
+                c.stock = stock
+
+            c.save()
+    
 
 def get_news():
     n = News(pages=40)
@@ -47,40 +83,15 @@ def get_news():
         except Stock.DoesNotExist:
             pass
 
-        c.save()
+        try:
+            c.save()
+        except:
+            continue
 
         print(f"Article {counter} added")
         counter += 1
 
-    # Stock News for top 500 stocks
-    top_stocks = Stock.objects.order_by('-market_cap')[:100]
-    for stock in top_stocks:
-        response = News.screen_ticker(stock.ticker)
-        for data in response:
-            date, title, image, site, text, url = \
-                article["publishedDate"], article["title"],\
-                article["image"], article["site"], article["text"],\
-                article["url"]
-
-            c = None
-            try:
-                c = Article.objects.get(title=title)
-            except Article.DoesNotExist:
-                c = Article()
-
-                c.title = title
-                c.serialized_date = date
-                c.image_link = image
-                c.content = text
-                c.original_link = url
-                c.site = site
-                c.stock = stock
-
-            c.save()
-
-            print(f"Article {counter} added")
-            counter += 1
-
+    custom_stock()
 
 def raw_screen():
     # Your script logic here

@@ -19,7 +19,7 @@ migrate:
 
 .PHONY: shell
 shell:
-	docker-compose exec web python manage.py shell
+	docker-compose exec web python manage.py shell_plus --ipython
 
 .PHONY: down
 down:

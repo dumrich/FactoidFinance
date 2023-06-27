@@ -27,7 +27,7 @@ SECRET_KEY = environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(environ.get("DEBUG"))
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
 
     # 3rd Party Apps
-    'django_celery_beat'
+    'django_celery_beat',
+    'django_extensions'
 
 ]
 

@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.urls import reverse
 from .models import Stock, StockAnalysis
+from articles.models import Article
 
 
 @login_required
@@ -18,8 +19,10 @@ def stock_detail(request, stock_id):
     )
     stock_analysis = StockAnalysis.objects.get(stock=stock)
 
+    news = Article.objects.filter(stock=stock)
+
     return render(request, "analysis/stock_detail.html",
-                  {"stock": stock, "details": stock_analysis})
+                  {"stock": stock, "details": stock_analysis, "news": news})
 
 
 @login_required
