@@ -122,10 +122,19 @@ button.addEventListener("click", function(){
   {% if article.stock %}
     <button class="btn source-link-mini"><a style="text-decoration: none; color: inherit;" href="{% url 'stock' article.stock.ticker %}">{{ article.stock.ticker }}</a>
     </button>
-    {% endif %}
-    <button class="btn source-link-mini" style="margin-left: 9px;"><a style="text-decoration: none; color: inherit;" href="{{ article.original_link }}">Source</a>
+  {% endif %}
+    <button class="btn source-link-mini" style="margin-left: 9px;"><a style="text-decoration: none; color: inherit;" href="{{ article.original_link }}">Source 1</a>
     </button>
-    
+    {% if article.source_link_2 %}
+    <button class="btn source-link-mini" style="margin-left: 9px;"><a style="text-decoration: none; color: inherit;" href="{{ article.source_link_2 }}">Source 2</a>
+    {% endif %}
+    {% if article.source_link_3 %}
+    <button class="btn source-link-mini" style="margin-left: 9px;"><a style="text-decoration: none; color: inherit;" href="{{ article.source_link_3 }}">Source 3</a>
+    {% endif %}
+
+    {% if article.source_link_4 %}
+    <button class="btn source-link-mini" style="margin-left: 9px;"><a style="text-decoration: none; color: inherit;" href="{{ article.source_link_4 }}">Source 4</a>
+    {% endif %}
 </div>
 </div>
 
