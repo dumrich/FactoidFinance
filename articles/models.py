@@ -22,6 +22,10 @@ class Article(models.Model):
 
     site = models.CharField(max_length=255, null=True, blank=True)
 
+    source_link_2 = models.URLField(max_length=255, null=True, blank=True)
+    source_link_3 = models.URLField(max_length=255, null=True, blank=True)
+    source_link_4 = models.URLField(max_length=255, null=True, blank=True)
+
     def __str__(self):
         return self.title
 
