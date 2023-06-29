@@ -61,7 +61,7 @@ Dashboard
 <div class="col-xl-12 col-lg-12 col-md-11">
 <div class="whats-right-single mb-20">
 <div class="whats-right-img">
-  <a href="{%url 'article_detail' art.id}">
+  <a href="{% url 'article_detail' art.id %}">
     <img src="{{ art.image_link }}" width="312" height="210" alt="">
   </a>
 </div>
